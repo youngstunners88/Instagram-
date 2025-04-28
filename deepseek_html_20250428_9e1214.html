@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Art Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #000;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .artist-section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .artist-name {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #e1306c;
+            padding-bottom: 10px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .video-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .video-title {
+            padding: 15px;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        .video-link {
+            text-decoration: none;
+            color: #e1306c;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Video Art Portfolio</h1>
+        <p>Showcasing works by Bdubbdaartist and Bagzamilleon</p>
+    </div>
+
+    <div class="artist-section">
+        <h2 class="artist-name">Bdubbdaartist</h2>
+        <div class="video-grid" id="bdubbdaartist-videos"></div>
+    </div>
+
+    <div class="artist-section">
+        <h2 class="artist-name">Bagzamilleon</h2>
+        <div class="video-grid" id="bagzamilleon-videos"></div>
+    </div>
+
+    <script>
+        const artists = {
+            bdubbdaartist: [
+                {
+                    url: "https://www.instagram.com/p/BATQ7QoGCN/",
+                    title: "Bdubbdaartist Video 1" // Replace with actual title
+                },
+                {
+                    url: "https://www.instagram.com/p/_tPBl7jYd/",
+                    title: "Bdubbdaartist Video 2"
+                },
+                {
+                    url: "https://www.instagram.com/p/_qY_r6LkO/",
+                    title: "Bdubbdaartist Video 3"
+                }
+            ],
+            bagzamilleon: [
+                {
+                    url: "https://www.instagram.com/p/_0d9ZXGNP/",
+                    title: "Bagzamilleon Video 1"
+                },
+                {
+                    url: "https://www.instagram.com/p/BAHBGtFkTE/",
+                    title: "Bagzamilleon Video 2"
+                },
+                {
+                    url: "https://www.instagram.com/p/BA0rQec1xK/",
+                    title: "Bagzamilleon Video 3"
+                },
+                {
+                    url: "https://www.instagram.com/p/BALOfqgtPH/",
+                    title: "Bagzamilleon Video 4"
+                }
+            ]
+        };
+
+        function createVideoCard(video) {
+            const postId = video.url.split('/').filter(part => part.length > 0).pop();
+            const thumbnailUrl = `https://www.instagram.com/p/${postId}/media/?size=m`;
+
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.innerHTML = `
+                <a href="${video.url}" target="_blank" rel="noopener noreferrer">
+                    <img src="${thumbnailUrl}" alt="${video.title}" class="video-thumbnail">
+                    <div class="video-title">
+                        <span class="video-link">${video.title}</span>
+                    </div>
+                </a>
+            `;
+            return card;
+        }
+
+        function loadVideos() {
+            const bdubbdaartistGrid = document.getElementById('bdubbdaartist-videos');
+            const bagzamilleonGrid = document.getElementById('bagzamilleon-videos');
+
+            artists.bdubbdaartist.forEach(video => {
+                bdubbdaartistGrid.appendChild(createVideoCard(video));
+            });
+
+            artists.bagzamilleon.forEach(video => {
+                bagzamilleonGrid.appendChild(createVideoCard(video));
+            });
+        }
+
+        // Load videos when page loads
+        window.addEventListener('DOMContentLoaded', loadVideos);
+    </script>
+</body>
+</html>
